@@ -11,6 +11,7 @@ logs
 
 # Global Node.js .gitignore settings
 .env
+*.pem
 
 # Logs
 logs

@@ -1,29 +1,29 @@
 import { z } from "zod";
 import { isValidPhoneNumber } from "libphonenumber-js";
+import { strongPassword } from "../auth/auth.validator.js";
 
-export const strongPassword = z
-  .string()
-  .min(8, "Password must be at least 8 characters")
-  .regex(/[A-Z]/, "Password must contain at least one uppercase letter")
-  .regex(/[a-z]/, "Password must contain at least one lowercase letter")
-  .regex(/[0-9]/, "Password must contain at least one number")
-  .regex(
-    /[^A-Za-z0-9]/,
-    "Password must contain at least one special character",
-  );
+export const updateUserInfoSchema = z
+  .object({
+    username: z.string().trim().max(255).optional(),
+    email: z.string().trim().email().optional(),
+    phone: z
+      .string()
+      .trim()
+      .refine((num) => isValidPhoneNumber(num), {
+        message: "Invalid Phone Number",
+      })
+      .optional()
+      .nullable()
+      .transform((v) => v ?? null),
+  })
+  .refine((data) => Object.keys(data).length > 0, {
+    message: "At least one field to update is required",
+  });
 
-export const createUserSchema = z.object({
-  username: z.string().trim().min(1, "Username is Required").max(255),
-  email: z.string().trim().email("Invalid Email Address"),
-  password: strongPassword,
-  phone: z
-    .string()
-    .trim()
-    .refine((num) => isValidPhoneNumber(num), {
-      message: "Invalid Phone Number",
-    })
-    .optional()
-    .nullable().transform(v => v ?? null)
+export const updateUserPasswordSchema = z.object({
+  currentPassword: z.string().min(1, "Current password is required."),
+  newPassword: strongPassword,
 });
 
-export type createUserInput = z.infer<typeof createUserSchema>;
+export type updateUserInfoInput = z.infer<typeof updateUserInfoSchema>;
+export type updateUserPasswordInput = z.infer<typeof updateUserPasswordSchema>;

@@ -24,4 +24,8 @@ app.use(
 app.use("/", appRouter);
 app.use(errorHandler);
 
+// app.use((req, res) => {
+//   return res.json("Not found");
+// });
+
 export default app;

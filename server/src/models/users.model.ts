@@ -1,4 +1,4 @@
-import { DataTypes, Model, type Optional } from "sequelize";
+import { DataTypes, DATE, Model, type Optional } from "sequelize";
 import bcrypt from "bcryptjs";
 import sequelize from "../config/db.js";
 import { USER_ROLES, type USER_ROLES_TYPE } from "../config/rolePermissions.js";
@@ -11,6 +11,7 @@ export interface UserAttributes {
   password: string;
   phone: string | null;
   role: USER_ROLES_TYPE;
+  refreshToken: string | null;
   created_at?: Date;
   updated_at?: Date;
   deleted_at?: Date | null;
@@ -19,7 +20,13 @@ export interface UserAttributes {
 // Defines the optional Fields during the creation of the user object
 interface UserCreationAttributes extends Optional<
   UserAttributes,
-  "id" | "role" | "phone" | "created_at" | "updated_at" | "deleted_at"
+  | "id"
+  | "role"
+  | "phone"
+  | "refreshToken"
+  | "created_at"
+  | "updated_at"
+  | "deleted_at"
 > {}
 
 // Overriding the Model Class to extend and add the methods which can be directly used to each user model instance
@@ -33,6 +40,7 @@ class User
   declare password: string;
   declare phone: string | null;
   declare role: USER_ROLES_TYPE;
+  declare refreshToken: string | null;
   declare created_at: Date;
   declare updated_at: Date;
   declare deleted_at: Date | null;
@@ -42,8 +50,8 @@ class User
   }
 
   // When we basically call res.json(user) with our model instance, Express calls JSON.stringify(user) on our model, this looks for toJSON() method for our model, the Sequelize ORM already provides its default one, but we override that toJSON() to not send the password field in the response
-  toJSON(): Omit<UserAttributes, "password"> {
-    const { password, ...values } = this.get() as UserAttributes;
+  toJSON(): Omit<UserAttributes, "password" | "refreshToken"> {
+    const { password, refreshToken, ...values } = this.get() as UserAttributes;
     return values;
   }
 }
@@ -65,7 +73,7 @@ User.init(
       allowNull: false,
     },
     password: {
-      type: DataTypes.STRING(512),
+      type: DataTypes.STRING(100),
       allowNull: false,
     },
     phone: {
@@ -76,6 +84,10 @@ User.init(
       type: DataTypes.ENUM(...USER_ROLES),
       allowNull: false,
       defaultValue: "user",
+    },
+    refreshToken: {
+      type: DataTypes.STRING(1024),
+      allowNull: true,
     },
   },
   {

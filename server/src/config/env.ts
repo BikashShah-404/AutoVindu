@@ -2,6 +2,9 @@ import dotenv from "dotenv";
 dotenv.config();
 
 import { z } from "zod";
+import type { StringValue } from "ms";
+
+const jwtExpirySchema = z.custom<StringValue>();
 
 const envSchema = z
   .object({
@@ -26,6 +29,10 @@ const envSchema = z
 
     // Bcrypt:
     BCRYPT_HASH_SALT: z.coerce.number().default(12),
+
+    // JWT_EXPIRIES:
+    JWT_ACCESS_EXPIRY: jwtExpirySchema.default("30m"),
+    JWT_REFRESH_EXPIRY: jwtExpirySchema.default("1d"),
   })
   .transform(
     ({
@@ -44,6 +51,8 @@ const envSchema = z
       DB_POOL_IDLE,
       BCRYPT_HASH_SALT,
       CLIENT_URL,
+      JWT_ACCESS_EXPIRY,
+      JWT_REFRESH_EXPIRY,
     }) => ({
       nodeEnv: NODE_ENV,
       port: PORT,
@@ -62,6 +71,14 @@ const envSchema = z
         poolIdle: DB_POOL_IDLE,
       },
       hashSalt: BCRYPT_HASH_SALT,
+      jwt: {
+        access: {
+          expiresIn: JWT_ACCESS_EXPIRY,
+        },
+        refresh: {
+          expiresIn: JWT_REFRESH_EXPIRY,
+        },
+      },
     }),
   );
 
