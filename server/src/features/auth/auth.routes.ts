@@ -1,5 +1,5 @@
 import Router from "express";
-import { validate } from "../../middlewares/validator.middleware.js";
+import { validateBody } from "../../middlewares/validator.middleware.js";
 import { createUserSchema, loginUserSchema } from "./auth.validator.js";
 import { authController } from "./auth.controller.js";
 
@@ -7,9 +7,14 @@ const router = Router();
 
 router
   .route("/create")
-  .post(validate(createUserSchema), authController.registerUser);
+  .post(validateBody(createUserSchema), authController.registerUser);
+
 router
   .route("/login")
-  .post(validate(loginUserSchema), authController.loginUser);
+  .post(validateBody(loginUserSchema), authController.loginUser);
+
+router.route("/refresh").post(authController.refreshTokens);
+
+router.route("/logout").post(authController.logoutUser);
 
 export default router;

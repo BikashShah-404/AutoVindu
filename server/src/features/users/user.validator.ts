@@ -25,5 +25,10 @@ export const updateUserPasswordSchema = z.object({
   newPassword: strongPassword,
 });
 
+export const idParamsSchema = z.object({
+  id: z.uuid(),
+});
+
 export type updateUserInfoInput = z.infer<typeof updateUserInfoSchema>;
 export type updateUserPasswordInput = z.infer<typeof updateUserPasswordSchema>;
+export type idParamsType = z.infer<typeof idParamsSchema>;

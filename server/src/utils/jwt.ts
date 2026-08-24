@@ -2,6 +2,7 @@ import jwt from "jsonwebtoken";
 import { privateKey, publicKey } from "./loadKeys.js";
 import type { USER_ROLES_TYPE } from "../config/rolePermissions.js";
 import { envVariables } from "../config/env.js";
+import { UnauthorizedError } from "./AppError.js";
 
 export interface JWTPayload {
   userId: string;
@@ -24,5 +25,11 @@ export const signRefreshToken = (payload: Omit<JWTPayload, "type">) => {
 };
 
 export const verifyJWT = (token: string) => {
-  return jwt.verify(token, publicKey, { algorithms: ["RS256"] }) as JWTPayload;
+  try {
+    return jwt.verify(token, publicKey, {
+      algorithms: ["RS256"],
+    }) as JWTPayload;
+  } catch (err) {
+    throw new UnauthorizedError("Invalid or expired token");
+  }
 };

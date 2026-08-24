@@ -1,0 +1,21 @@
+<mxfile host="65bd71144e">
+    <diagram id="Mkn32LKIalBLi4dX3Ngw" name="Page-1">
+        <mxGraphModel dx="936" dy="1011" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+            <root>
+                <mxCell id="0"/>
+                <mxCell id="1" parent="0"/>
+                <mxCell id="kemivuhpMzAQJc-QpxKS-1" edge="1" parent="1" source="zhTbphB-GeM6nVRNUPRo-2" style="edgeStyle=none;html=1;">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="400" y="335" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="zhTbphB-GeM6nVRNUPRo-2" parent="1" style="whiteSpace=wrap;html=1;aspect=fixed;align=center;" value="&lt;div style=&quot;&quot;&gt;&lt;div style=&quot;text-align: left; padding-top: 0px;&quot;&gt;&lt;span style=&quot;font-size: 20px; color: light-dark(rgb(255, 255, 255), rgb(255, 255, 255));&quot;&gt;&lt;u&gt;id&lt;/u&gt;&lt;/span&gt;&lt;/div&gt;&lt;span style=&quot;color: light-dark(rgb(255, 255, 255), rgb(255, 255, 255));&quot;&gt;&lt;span style=&quot;font-size: 20px; vertical-align: sub;&quot;&gt;&lt;div style=&quot;text-align: left;&quot;&gt;&lt;span&gt;email&lt;/span&gt;&lt;/div&gt;&lt;/span&gt;&lt;span style=&quot;font-size: 20px; vertical-align: sub;&quot;&gt;&lt;div style=&quot;text-align: left;&quot;&gt;&lt;span&gt;username&lt;/span&gt;&lt;/div&gt;&lt;/span&gt;&lt;span style=&quot;font-size: 20px; vertical-align: sub;&quot;&gt;&lt;div style=&quot;text-align: left;&quot;&gt;&lt;span&gt;password&lt;/span&gt;&lt;/div&gt;&lt;/span&gt;&lt;span style=&quot;font-size: 20px; vertical-align: sub;&quot;&gt;&lt;div style=&quot;text-align: left;&quot;&gt;&lt;span&gt;phone&lt;/span&gt;&lt;/div&gt;&lt;/span&gt;&lt;span style=&quot;font-size: 20px; vertical-align: sub;&quot;&gt;&lt;div style=&quot;text-align: left;&quot;&gt;&lt;span&gt;role&lt;/span&gt;&lt;/div&gt;&lt;/span&gt;&lt;span style=&quot;font-size: 20px; vertical-align: sub;&quot;&gt;&lt;div style=&quot;text-align: left;&quot;&gt;refreshToken&lt;/div&gt;&lt;/span&gt;&lt;/span&gt;&lt;/div&gt;&lt;div&gt;&lt;/div&gt;" vertex="1">
+                    <mxGeometry height="230" width="230" x="90" y="220" as="geometry"/>
+                </mxCell>
+                <mxCell id="zhTbphB-GeM6nVRNUPRo-3" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="&lt;font style=&quot;font-size: 17px;&quot;&gt;USERS&lt;/font&gt;" vertex="1">
+                    <mxGeometry height="30" width="210" x="100" y="190" as="geometry"/>
+                </mxCell>
+            </root>
+        </mxGraphModel>
+    </diagram>
+</mxfile>
